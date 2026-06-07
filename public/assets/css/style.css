@@ -98,7 +98,7 @@ img {
     padding: clamp(48px, 8vw, 110px) clamp(18px, 4vw, 56px);
     background:
         linear-gradient(90deg, rgba(12, 15, 20, 0.92), rgba(12, 15, 20, 0.48)),
-        url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1900&q=85") center / cover;
+        url("../img/banner.png") center / cover;
 }
 
 .hero-copy {
@@ -325,13 +325,70 @@ h2 {
     padding: clamp(48px, 8vw, 92px) clamp(18px, 4vw, 56px);
     background:
         linear-gradient(90deg, rgba(12, 15, 20, 0.92), rgba(12, 15, 20, 0.52)),
-        url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80") center / cover;
+        url("../img/banner.png") center / cover;
 }
 
 .packages-hero {
     background:
         linear-gradient(90deg, rgba(12, 15, 20, 0.92), rgba(12, 15, 20, 0.52)),
-        url("https://images.unsplash.com/photo-1508973379184-7517410fb0bc?auto=format&fit=crop&w=1600&q=80") center / cover;
+        url("../img/banner.png") center / cover;
+}
+
+.effects-hero {
+    background:
+        linear-gradient(90deg, rgba(12, 15, 20, 0.94), rgba(12, 15, 20, 0.45)),
+        url("https://images.unsplash.com/photo-1514525253161-7a46d19cd8195?auto=format&fit=crop&w=1600&q=80") center / cover;
+}
+
+.effects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.effect-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+}
+
+.effect-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.effect-card div {
+    padding: 18px;
+}
+
+.effect-card h3 {
+    margin: 12px 0 8px;
+    font-size: 25px;
+}
+
+.effect-card strong {
+    display: block;
+    margin: 14px 0;
+    color: var(--accent);
+}
+
+.effect-card small {
+    display: block;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.safety-band {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+    gap: 28px;
+    align-items: start;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 }
 
 .package-list {
@@ -696,6 +753,7 @@ th {
 
     .split,
     .service-intro,
+    .safety-band,
     .detail-layout,
     .contact-layout,
     .admin-layout,
@@ -712,6 +770,7 @@ th {
     .brand-grid,
     .service-grid,
     .product-grid,
+    .effects-grid,
     .stat-grid,
     .form-grid,
     .package-specs {
