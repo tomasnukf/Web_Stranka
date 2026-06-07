@@ -249,12 +249,17 @@ h2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
+    background: #f5f7fb;
 }
 
 .photo-strip img {
     width: 100%;
-    height: 320px;
-    object-fit: cover;
+    height: 360px;
+    max-height: 360px;
+    object-fit: contain;
+    object-position: center;
+    padding: 50px 56px;
+    background: #f5f7fb;
 }
 
 .package-teaser {
@@ -288,8 +293,11 @@ h2 {
 
 .product-card img {
     width: 100%;
-    height: 220px;
-    object-fit: cover;
+    height: 280px;
+    object-fit: contain;
+    object-position: center;
+    padding: 20px;
+    background: #f7f8fb;
 }
 
 .product-card div {
@@ -704,6 +712,32 @@ th {
     min-height: 34px;
     color: var(--danger);
     background: transparent;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.status.new {
+    background: rgba(247, 201, 72, 0.16);
+    color: var(--accent);
+}
+
+.status.done {
+    background: rgba(45, 212, 191, 0.14);
+    color: var(--accent-2);
+}
+
+.message-cell {
+    max-width: 360px;
+    white-space: normal;
+    line-height: 1.5;
 }
 
 .form-grid {

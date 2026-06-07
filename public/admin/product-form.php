@@ -3,6 +3,7 @@
         <strong>ProLux admin</strong>
         <a href="<?= BASE_URL ?>/admin/index.php">Dashboard</a>
         <a href="<?= BASE_URL ?>/admin/products.php">CRUD svetiel</a>
+        <a href="<?= BASE_URL ?>/admin/inquiries.php">Dopyty</a>
         <a href="<?= BASE_URL ?>/admin/logout.php">Odhlasit</a>
     </aside>
     <div class="admin-content">

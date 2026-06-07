@@ -3,12 +3,14 @@
 require_once __DIR__ . '/../../src/Bootstrap.php';
 
 use App\Model\Light;
+use App\Model\Inquiry;
 use App\Security\Auth;
 
 Auth::requireAdmin();
 
 $title = 'Admin dashboard | ProLux';
 $lights = (new Light())->all();
+$newInquiries = (new Inquiry())->countNew();
 
 require __DIR__ . '/../partials/header.php';
 ?>
@@ -18,6 +20,7 @@ require __DIR__ . '/../partials/header.php';
         <strong>ProLux admin</strong>
         <a href="<?= BASE_URL ?>/admin/index.php">Dashboard</a>
         <a href="<?= BASE_URL ?>/admin/products.php">CRUD svetiel</a>
+        <a href="<?= BASE_URL ?>/admin/inquiries.php">Dopyty</a>
         <a href="<?= BASE_URL ?>/admin/logout.php">Odhlasit</a>
     </aside>
     <div class="admin-content">
@@ -29,8 +32,8 @@ require __DIR__ . '/../partials/header.php';
                 <strong><?= count($lights) ?></strong>
             </div>
             <div class="stat-card">
-                <span>CRUD entita</span>
-                <strong>lights</strong>
+                <span>Nove dopyty</span>
+                <strong><?= $newInquiries ?></strong>
             </div>
             <div class="stat-card">
                 <span>Backend</span>
@@ -38,6 +41,7 @@ require __DIR__ . '/../partials/header.php';
             </div>
         </div>
         <a class="button primary" href="<?= BASE_URL ?>/admin/products.php">Spravovat svetla</a>
+        <a class="button" href="<?= BASE_URL ?>/admin/inquiries.php">Zobrazit dopyty</a>
     </div>
 </section>
 

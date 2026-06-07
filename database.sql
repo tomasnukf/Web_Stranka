@@ -6,6 +6,7 @@ USE prolux;
 
 DROP TABLE IF EXISTS special_effects;
 DROP TABLE IF EXISTS rental_packages;
+DROP TABLE IF EXISTS inquiries;
 DROP TABLE IF EXISTS lights;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS manufacturers;
@@ -41,6 +42,17 @@ CREATE TABLE users (
     name VARCHAR(120) NOT NULL,
     email VARCHAR(180) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE inquiries (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(160) NOT NULL,
+    email VARCHAR(180) NOT NULL,
+    phone VARCHAR(80) NULL,
+    event_date DATE NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(30) NOT NULL DEFAULT 'new',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 

@@ -48,7 +48,7 @@ require __DIR__ . '/partials/header.php';
 <section class="section split">
     <div>
         <p class="eyebrow">Ponuka znaciek</p>
-        <h2>Oficialni vyrobcovia v nasej databaze</h2>
+        <h2>Spolupraca s vyrobcami</h2>
         <p>Produkty su nacitane dynamicky z databazy. V administracii mozes svetla pridavat, upravovat aj mazat.</p>
     </div>
     <div class="brand-grid">
@@ -61,9 +61,9 @@ require __DIR__ . '/partials/header.php';
 </section>
 
 <section class="photo-strip" aria-label="Stage lighting ukazky">
-    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd8195?auto=format&fit=crop&w=900&q=80" alt="Koncertne stage svetla">
-    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80" alt="Festivalovy stage">
-    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80" alt="Hudobny koncert">
+    <img src="https://www.pulse-me.com/web/image/product.brand/417/logo" alt="MA Lighting logo">
+    <img src="https://cdn.ecommercedns.uk/files/2/252792/0/37681080/avolites-logo-wine.png" alt="Avolites logo">
+    <img src="https://cdn.shopify.com/s/files/1/0447/0413/7384/files/chamsys_logo_08dbfe95-9939-4107-829f-bc5f4a94853b.png?v=1733105549" alt="ChamSys logo">
 </section>
 
 <section class="section package-teaser">
