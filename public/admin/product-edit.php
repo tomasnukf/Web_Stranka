@@ -7,9 +7,11 @@ use App\Model\Manufacturer;
 use App\Security\Auth;
 use App\Security\Csrf;
 
+// Uprava svetla je pristupna iba adminovi.
 Auth::requireAdmin();
 
 $model = new Light();
+// Edituje sa konkretne svetlo podla ID z URL.
 $light = $model->find((int) ($_GET['id'] ?? 0));
 
 if (!$light) {
@@ -22,6 +24,7 @@ $manufacturers = (new Manufacturer())->all();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // CSRF kontrola chrani formular pred cudzim odoslanim.
     if (!Csrf::validate($_POST['csrf_token'] ?? null)) {
         $errors[] = 'Neplatny bezpecnostny token.';
     }
@@ -31,10 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors) {
+        // Update ulozi zmenene udaje do tabulky lights.
         $model->update((int) $light['id'], $_POST);
         redirect('/admin/products.php');
     }
 
+    // Pri chybe ostanu vo formulari zadane hodnoty.
     $light = array_merge($light, $_POST);
 }
 

@@ -1,5 +1,6 @@
 USE prolux;
 
+-- Migracia pre hotove stage balicky.
 CREATE TABLE IF NOT EXISTS rental_packages (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(140) NOT NULL,
@@ -18,12 +19,14 @@ CREATE TABLE IF NOT EXISTS rental_packages (
 
 DELETE FROM rental_packages;
 
+-- Testovacie / zakladne balicky zoradene od najdrahsieho.
 INSERT INTO rental_packages
 (name, category, price, beam_count, wash_count, spot_count, hazer_count, truss_meters, crew_count, image_url, description) VALUES
 ('Arena Tour XL', 'Velky stage', 24500.00, 40, 30, 20, 2, 96, 8, 'https://commons.wikimedia.org/wiki/Special:FilePath/FlexiFlex%20Touring%20Truss.jpg?width=1200', 'Kompletny svetelny balik pre festival, halu alebo velky open-air koncert. Obsahuje svetelne rampy, moving heads, hazery, pripravu patchu a technicky dozor.'),
 ('Club Pro M', 'Stredny stage', 16800.00, 24, 18, 12, 2, 60, 5, 'https://commons.wikimedia.org/wiki/Special:FilePath/Hanging%20stage%20lights.jpg?width=1200', 'Balik pre klubove koncerty, firemne eventy a stredne velke podia. Rozumne mnozstvo beam, wash a spot svetiel pre plnohodnotnu show.'),
 ('Event Start S', 'Mensi stage', 10000.00, 16, 12, 8, 1, 36, 3, 'https://commons.wikimedia.org/wiki/Special:FilePath/Traverse%20%28Truss%29.JPG?width=1200', 'Zakladny profesionalny balik pre mensie koncerty, party a prezentacie. Minimalna cena je 10 000 EUR.');
 
+-- Aktualizacia obrazkov svetiel na konkretne produktove fotky.
 UPDATE lights SET image_url = CASE name
     WHEN 'Robe MegaPointe' THEN 'https://cdn.aws.robe.cz/v1/image/resize/025ed591ad67ff06e9dd82b461e0c345ba595d4a?width=900&height=900&fit=cover&withoutEnlargement=false'
     WHEN 'Robe Spiider' THEN 'https://cdn.aws.robe.cz/v1/image/resize/bacf4d213ec3c79f0b0fbc9128588eea91297efa?width=900&height=900&fit=cover&withoutEnlargement=false'

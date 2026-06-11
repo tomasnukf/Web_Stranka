@@ -6,11 +6,13 @@ use App\Model\Inquiry;
 use App\Security\Auth;
 use App\Security\Csrf;
 
+// Dopyty kezelese csak admin bejelentkezes utan.
 Auth::requireAdmin();
 
 $model = new Inquiry();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && Csrf::validate($_POST['csrf_token'] ?? null)) {
+    // Admin akcio: dopyt megjelolese vybavene vagy torles.
     $id = (int) ($_POST['id'] ?? 0);
 
     if (($_POST['action'] ?? '') === 'done') {
@@ -25,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Csrf::validate($_POST['csrf_token']
 }
 
 $title = 'Dopyty | ProLux';
+// Minden dopyt betoltese az admin tablazatba.
 $inquiries = $model->all();
 
 require __DIR__ . '/../partials/header.php';

@@ -7,10 +7,12 @@ namespace App\Model;
 use App\Core\Database;
 use PDO;
 
+// Svetla termekek kezelese: listazas, reszlet, letrehozas, modositas, torles.
 final class Light
 {
     public function all(?int $manufacturerId = null): array
     {
+        // Osszes aktiv vilagitasi termek lekerese, opcionakent gyarto szerint szurve.
         $sql = 'SELECT lights.*, manufacturers.name AS manufacturer_name
                 FROM lights
                 INNER JOIN manufacturers ON manufacturers.id = lights.manufacturer_id';
@@ -31,6 +33,7 @@ final class Light
 
     public function featured(int $limit = 6): array
     {
+        // Fooldalra csak nehany kiemelt termeket ad vissza.
         $statement = Database::getConnection()->prepare(
             'SELECT lights.*, manufacturers.name AS manufacturer_name
              FROM lights
@@ -47,6 +50,7 @@ final class Light
 
     public function find(int $id): ?array
     {
+        // Egy konkret svetlo reszletes adatai ID alapjan.
         $statement = Database::getConnection()->prepare(
             'SELECT lights.*, manufacturers.name AS manufacturer_name
              FROM lights
@@ -61,6 +65,7 @@ final class Light
 
     public function create(array $data): void
     {
+        // Uj svetlo mentese az admin formularbol.
         $statement = Database::getConnection()->prepare(
             'INSERT INTO lights
                 (manufacturer_id, name, category, power_w, rental_price, stock, image_url, description, active)
@@ -72,6 +77,7 @@ final class Light
 
     public function update(int $id, array $data): void
     {
+        // Meglevo svetlo adatainak frissitese.
         $payload = $this->payload($data);
         $payload['id'] = $id;
 
@@ -93,12 +99,14 @@ final class Light
 
     public function delete(int $id): void
     {
+        // Svetlo torlese az adatbazisbol.
         $statement = Database::getConnection()->prepare('DELETE FROM lights WHERE id = :id');
         $statement->execute(['id' => $id]);
     }
 
     private function payload(array $data): array
     {
+        // Urlap adatainak atalakitasa biztonsagos adatbazis formatumra.
         return [
             'manufacturer_id' => (int) $data['manufacturer_id'],
             'name' => trim((string) $data['name']),
@@ -114,11 +122,13 @@ final class Light
 
     private function withFixtureImages(array $lights): array
     {
+        // Minden termekhez ellenorzi, van-e pontosabb termekfoto.
         return array_map(fn (array $light): array => $this->withFixtureImage($light), $lights);
     }
 
     private function withFixtureImage(array $light): array
     {
+        // Ha regi altalanos kep van, lecsereli konkret svetlo fotora.
         $image = $this->fixtureImage((string) $light['name'], (string) $light['category']);
 
         if ($image !== null && (
@@ -133,6 +143,7 @@ final class Light
 
     private function fixtureImage(string $name, string $category): ?string
     {
+        // Konkret modellekhez rendelt hivatalos vagy termek jellegu kepek.
         $images = [
             'robe megapointe' => 'https://cdn.aws.robe.cz/v1/image/resize/025ed591ad67ff06e9dd82b461e0c345ba595d4a?width=900&height=900&fit=cover&withoutEnlargement=false',
             'robe spiider' => 'https://cdn.aws.robe.cz/v1/image/resize/bacf4d213ec3c79f0b0fbc9128588eea91297efa?width=900&height=900&fit=cover&withoutEnlargement=false',

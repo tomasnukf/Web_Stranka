@@ -7,6 +7,7 @@ use App\Model\Manufacturer;
 use App\Security\Auth;
 use App\Security\Csrf;
 
+// Uj svetlo pridanie: admin autorizacia.
 Auth::requireAdmin();
 
 $title = 'Pridat svetlo | ProLux';
@@ -14,20 +15,24 @@ $manufacturers = (new Manufacturer())->all();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Urlap biztonsagi token ellenorzese.
     if (!Csrf::validate($_POST['csrf_token'] ?? null)) {
         $errors[] = 'Neplatny bezpecnostny token.';
     }
 
+    // Minimalis validacio: nazov je povinny.
     if (trim($_POST['name'] ?? '') === '') {
         $errors[] = 'Nazov svetla je povinny.';
     }
 
     if (!$errors) {
+        // Light model vytvori novy zaznam v databaze.
         (new Light())->create($_POST);
         redirect('/admin/products.php');
     }
 }
 
+// Predvolene hodnoty pre prazdny formular.
 $light = [
     'manufacturer_id' => $manufacturers[0]['id'] ?? 1,
     'name' => '',

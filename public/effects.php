@@ -4,6 +4,7 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 
 use App\Model\SpecialEffect;
 
+// Specialne efekty sa nacitaju z databazy cez model SpecialEffect.
 $title = 'Specialne efekty | ProLux';
 $effects = (new SpecialEffect())->all();
 
@@ -26,6 +27,7 @@ require __DIR__ . '/partials/header.php';
     </div>
 
     <div class="effects-grid">
+        <?php // Zobrazenie vsetkych efektov, vratane ceny a bezpecnostnej poznamky. ?>
         <?php foreach ($effects as $effect): ?>
             <article class="effect-card">
                 <img src="<?= e($effect['image_url']) ?>" alt="<?= e($effect['name']) ?>">
@@ -33,6 +35,7 @@ require __DIR__ . '/partials/header.php';
                     <span class="tag"><?= e($effect['category']) ?></span>
                     <h3><?= e($effect['name']) ?></h3>
                     <p><?= e($effect['description']) ?></p>
+                    <?php // Ak je cena 0, znamena to individualnu kalkulaciu. ?>
                     <?php if ((float) $effect['price'] > 0): ?>
                         <strong>od <?= number_format((float) $effect['price'], 0, ',', ' ') ?> EUR / <?= e($effect['unit']) ?></strong>
                     <?php else: ?>

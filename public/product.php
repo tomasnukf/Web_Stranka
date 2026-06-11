@@ -4,9 +4,11 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 
 use App\Model\Light;
 
+// Detail stranka nacita jedno svetlo podla ID z URL.
 $light = (new Light())->find((int) ($_GET['id'] ?? 0));
 
 if (!$light) {
+    // Ak ID neexistuje, stranka vrati 404 odpoved.
     http_response_code(404);
     exit('Produkt neexistuje.');
 }

@@ -1,4 +1,5 @@
 <?php
+// Spolocna hlavicka pre vsetky verejne aj admin stranky.
 $currentPath = $_SERVER['SCRIPT_NAME'] ?? '';
 ?>
 <!doctype html>
@@ -15,8 +16,10 @@ $currentPath = $_SERVER['SCRIPT_NAME'] ?? '';
         <span class="brand-mark">PL</span>
         <span>ProLux</span>
     </a>
+    <?php // Mobilne menu ovlada JavaScript cez data-nav-toggle. ?>
     <button class="nav-toggle" type="button" aria-label="Menu" data-nav-toggle>Menu</button>
     <nav class="main-nav" data-nav>
+        <?php // Aktivna trieda oznaci aktualnu stranku v menu. ?>
         <a href="<?= BASE_URL ?>/index.php" class="<?= str_contains($currentPath, 'index.php') ? 'active' : '' ?>">Domov</a>
         <a href="<?= BASE_URL ?>/products.php" class="<?= str_contains($currentPath, 'products.php') ? 'active' : '' ?>">Svetla</a>
         <a href="<?= BASE_URL ?>/packages.php" class="<?= str_contains($currentPath, 'packages.php') ? 'active' : '' ?>">Balicky</a>

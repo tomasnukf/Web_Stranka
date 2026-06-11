@@ -7,10 +7,12 @@ namespace App\Model;
 use App\Core\Database;
 use PDOException;
 
+// Stage lighting balicky adatainak kezelese.
 final class Package
 {
     public function all(): array
     {
+        // Balicky betoltese adatbazisbol, ar szerint csokkeno sorrendben.
         try {
             return Database::getConnection()
                 ->query('SELECT * FROM rental_packages ORDER BY price DESC')
@@ -22,6 +24,7 @@ final class Package
 
     private function fallback(): array
     {
+        // Tartalek adatok, ha a balicky tabla meg nem letezik az adatbazisban.
         return [
             [
                 'name' => 'Arena Tour XL',

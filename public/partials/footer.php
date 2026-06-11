@@ -1,4 +1,5 @@
 </main>
+<?php // Spolocna pata stranky s kratkym popisom a znackami. ?>
 <footer class="site-footer">
     <div>
         <strong>ProLux</strong>

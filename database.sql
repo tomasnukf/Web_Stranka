@@ -1,9 +1,11 @@
+-- Fo SQL subor: vytvori celu databazu ProLux od zaciatku.
 CREATE DATABASE IF NOT EXISTS prolux
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
 USE prolux;
 
+-- Stare tabulky sa odstrania, aby import vytvoril cistu strukturu.
 DROP TABLE IF EXISTS special_effects;
 DROP TABLE IF EXISTS rental_packages;
 DROP TABLE IF EXISTS inquiries;
@@ -11,6 +13,7 @@ DROP TABLE IF EXISTS lights;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS manufacturers;
 
+-- Gyartok tabulka: Robe, Martin, Showtek, ADJ, DTS.
 CREATE TABLE manufacturers (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -19,6 +22,7 @@ CREATE TABLE manufacturers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Svetla tabulka: produkty pre prenajom a CRUD operacie.
 CREATE TABLE lights (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     manufacturer_id INT UNSIGNED NOT NULL,
@@ -37,6 +41,7 @@ CREATE TABLE lights (
         ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
+-- Admin pouzivatelia s hashelt jelszoval.
 CREATE TABLE users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
@@ -45,6 +50,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Dopyty zakaznikov z kontaktneho formulara.
 CREATE TABLE inquiries (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(160) NOT NULL,
@@ -56,6 +62,7 @@ CREATE TABLE inquiries (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Hotove stage balicky s poctami svetiel a technikov.
 CREATE TABLE rental_packages (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(140) NOT NULL,
@@ -72,6 +79,7 @@ CREATE TABLE rental_packages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
+-- Specialne efekty ako CO2, confetti, laser, plamene.
 CREATE TABLE special_effects (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(140) NOT NULL,

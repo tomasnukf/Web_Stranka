@@ -5,6 +5,7 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 use App\Model\Light;
 use App\Model\Manufacturer;
 
+// Ponuka svetiel: a lista gyarto szerint szurheto.
 $title = 'Ponuka svetiel | ProLux';
 $manufacturerId = isset($_GET['manufacturer']) ? (int) $_GET['manufacturer'] : null;
 $manufacturers = (new Manufacturer())->all();
@@ -22,6 +23,7 @@ require __DIR__ . '/partials/header.php';
 <section class="section">
     <div class="filters">
         <a class="<?= $manufacturerId === null ? 'selected' : '' ?>" href="<?= BASE_URL ?>/products.php">Vsetko</a>
+        <?php // Szuro linkek minden gyartohoz. ?>
         <?php foreach ($manufacturers as $manufacturer): ?>
             <a class="<?= $manufacturerId === (int) $manufacturer['id'] ? 'selected' : '' ?>" href="<?= BASE_URL ?>/products.php?manufacturer=<?= (int) $manufacturer['id'] ?>">
                 <?= e($manufacturer['name']) ?>
@@ -30,6 +32,7 @@ require __DIR__ . '/partials/header.php';
     </div>
 
     <div class="product-grid">
+        <?php // Termek kartyak a Light modelbol kapott adatokbol. ?>
         <?php foreach ($lights as $light): ?>
             <article class="product-card">
                 <img src="<?= e($light['image_url']) ?>" alt="<?= e($light['name']) ?>">

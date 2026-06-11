@@ -6,8 +6,10 @@ use App\Model\Light;
 use App\Model\Inquiry;
 use App\Security\Auth;
 
+// Admin dashboard csak bejelentkezett adminnak erheto el.
 Auth::requireAdmin();
 
+// Statisztikak betoltese az admin kezdooldalra.
 $title = 'Admin dashboard | ProLux';
 $lights = (new Light())->all();
 $newInquiries = (new Inquiry())->countNew();

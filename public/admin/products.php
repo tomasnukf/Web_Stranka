@@ -6,8 +6,10 @@ use App\Model\Light;
 use App\Security\Auth;
 use App\Security\Csrf;
 
+// CRUD svetiel: csak bejelentkezett admin hasznalhatja.
 Auth::requireAdmin();
 
+// Az osszes svetlo betoltese tablazatos admin nezethez.
 $title = 'CRUD svetiel | ProLux';
 $lights = (new Light())->all();
 
@@ -52,6 +54,7 @@ require __DIR__ . '/../partials/header.php';
                         <td><?= (int) $light['stock'] ?> ks</td>
                         <td class="actions">
                             <a href="<?= BASE_URL ?>/admin/product-edit.php?id=<?= (int) $light['id'] ?>">Upravit</a>
+                            <?php // Torlesnel POST + CSRF token van hasznalva. ?>
                             <form method="post" action="<?= BASE_URL ?>/admin/product-delete.php" onsubmit="return confirm('Naozaj vymazat svetlo?')">
                                 <input type="hidden" name="csrf_token" value="<?= e(Csrf::token()) ?>">
                                 <input type="hidden" name="id" value="<?= (int) $light['id'] ?>">

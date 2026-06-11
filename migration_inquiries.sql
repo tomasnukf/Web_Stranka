@@ -1,5 +1,6 @@
 USE prolux;
 
+-- Migracia pre dopyty: vytvori tabulku pre spravy zakaznikov.
 CREATE TABLE IF NOT EXISTS inquiries (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(160) NOT NULL,

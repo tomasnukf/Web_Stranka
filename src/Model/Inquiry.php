@@ -6,10 +6,12 @@ namespace App\Model;
 
 use App\Core\Database;
 
+// Dopytok / erdeklodesek adatbazis muveletei.
 final class Inquiry
 {
     public function all(): array
     {
+        // Admin oldalon a legujabb erdeklodesek jelennek meg elol.
         return Database::getConnection()
             ->query('SELECT * FROM inquiries ORDER BY created_at DESC')
             ->fetchAll();
@@ -17,6 +19,7 @@ final class Inquiry
 
     public function countNew(): int
     {
+        // Dashboardon megmutatja, hany uj dopyt van.
         return (int) Database::getConnection()
             ->query("SELECT COUNT(*) FROM inquiries WHERE status = 'new'")
             ->fetchColumn();
@@ -24,6 +27,7 @@ final class Inquiry
 
     public function create(array $data): void
     {
+        // Kapcsolat urlap adatait menti az inquiries tablaba.
         $statement = Database::getConnection()->prepare(
             'INSERT INTO inquiries (name, email, phone, event_date, message, status)
              VALUES (:name, :email, :phone, :event_date, :message, :status)'
@@ -40,12 +44,14 @@ final class Inquiry
 
     public function markDone(int $id): void
     {
+        // A dopyt statuszat vybavene/done allapotra allitja.
         $statement = Database::getConnection()->prepare("UPDATE inquiries SET status = 'done' WHERE id = :id");
         $statement->execute(['id' => $id]);
     }
 
     public function delete(int $id): void
     {
+        // Dopyt torlese az admin feluletrol.
         $statement = Database::getConnection()->prepare('DELETE FROM inquiries WHERE id = :id');
         $statement->execute(['id' => $id]);
     }

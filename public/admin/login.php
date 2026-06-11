@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../src/Bootstrap.php';
 use App\Security\Auth;
 use App\Security\Csrf;
 
+// Ha az admin mar be van jelentkezve, nem kell ujra login.
 if (Auth::check()) {
     redirect('/admin/index.php');
 }
@@ -13,9 +14,11 @@ $title = 'Admin prihlasenie | ProLux';
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Login urlap CSRF ellenorzese.
     if (!Csrf::validate($_POST['csrf_token'] ?? null)) {
         $error = 'Neplatny bezpecnostny token.';
     } elseif ((new Auth())->attempt($_POST['email'] ?? '', $_POST['password'] ?? '')) {
+        // Sikeres bejelentkezes utan admin dashboard.
         redirect('/admin/index.php');
     } else {
         $error = 'Nespravny email alebo heslo.';
@@ -27,6 +30,7 @@ require __DIR__ . '/../partials/header.php';
 
 <section class="auth-screen">
     <form class="form-card auth-card" method="post">
+        <?php // Token ved a hamis login kuldes ellen. ?>
         <input type="hidden" name="csrf_token" value="<?= e(Csrf::token()) ?>">
         <p class="eyebrow">Administracia</p>
         <h1>Prihlasenie</h1>

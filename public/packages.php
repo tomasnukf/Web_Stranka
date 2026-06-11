@@ -4,6 +4,7 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 
 use App\Model\Package;
 
+// Balicky sa nacitaju dynamicky z modelu Package.
 $title = 'Balicky stage lighting | ProLux';
 $packages = (new Package())->all();
 
@@ -18,6 +19,7 @@ require __DIR__ . '/partials/header.php';
 
 <section class="section">
     <div class="package-list">
+        <?php // Kazdy balik sa vypise ako samostatna karta. ?>
         <?php foreach ($packages as $package): ?>
             <article class="package-card">
                 <img src="<?= e($package['image_url']) ?>" alt="<?= e($package['name']) ?>">

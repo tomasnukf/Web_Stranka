@@ -7,10 +7,12 @@ namespace App\Model;
 use App\Core\Database;
 use PDOException;
 
+// Specialis effektek adatainak kezelese.
 final class SpecialEffect
 {
     public function all(): array
     {
+        // Effektek lekerese adatbazisbol ar es nev szerint rendezve.
         try {
             return Database::getConnection()
                 ->query('SELECT * FROM special_effects ORDER BY price DESC, name ASC')
@@ -22,6 +24,7 @@ final class SpecialEffect
 
     private function fallback(): array
     {
+        // Tartalek lista, hogy az oldal adatbazis hiba eseten is mutasson tartalmat.
         return [
             [
                 'name' => 'CO2 dela',

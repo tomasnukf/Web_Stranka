@@ -15,6 +15,7 @@
         <?php endforeach; ?>
 
         <form class="form-card wide" method="post">
+            <?php // Spolocny formular pre vytvorenie aj upravu svetla. ?>
             <input type="hidden" name="csrf_token" value="<?= e(App\Security\Csrf::token()) ?>">
             <label>Vyrobca
                 <select name="manufacturer_id" required>

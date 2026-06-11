@@ -5,15 +5,18 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 use App\Model\Inquiry;
 use App\Security\Csrf;
 
+// Kontakt oldal: dopyt urlap feldolgozasa es mentese adatbazisba.
 $title = 'Kontakt | ProLux';
 $sent = false;
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // CSRF token ved az idegen oldalrol kuldott hamis urlap ellen.
     if (!Csrf::validate($_POST['csrf_token'] ?? null)) {
         $errors[] = 'Neplatny bezpecnostny token.';
     }
 
+    // Egyszeru szerver oldali validacio.
     if (trim($_POST['name'] ?? '') === '') {
         $errors[] = 'Meno je povinne.';
     }
@@ -27,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors) {
+        // Hibas adatok nelkul az Inquiry model elmenti a dopytot.
         (new Inquiry())->create($_POST);
         $sent = true;
         $_POST = [];
@@ -44,6 +48,7 @@ require __DIR__ . '/partials/header.php';
 
 <section class="contact-layout">
     <form class="form-card" method="post">
+        <?php // Rejtett biztonsagi token az urlaphoz. ?>
         <input type="hidden" name="csrf_token" value="<?= e(Csrf::token()) ?>">
         <?php if ($sent): ?>
             <div class="notice">Dakujeme, dopyt bol odoslany. Najdes ho v administracii v sekcii Dopyty.</div>

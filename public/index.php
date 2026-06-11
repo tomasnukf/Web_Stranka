@@ -5,6 +5,7 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 use App\Model\Light;
 use App\Model\Manufacturer;
 
+// Fooldal: gyartok es kiemelt svetla betoltese adatbazisbol.
 $title = 'ProLux | Rentovanie stage lighting techniky';
 $manufacturers = (new Manufacturer())->all();
 $featuredLights = (new Light())->featured(6);
@@ -52,6 +53,7 @@ require __DIR__ . '/partials/header.php';
         <p>Produkty su nacitane dynamicky z databazy. V administracii mozes svetla pridavat, upravovat aj mazat.</p>
     </div>
     <div class="brand-grid">
+        <?php // Gyarto csempek dinamikusan az adatbazisbol. ?>
         <?php foreach ($manufacturers as $manufacturer): ?>
             <a href="<?= BASE_URL ?>/products.php?manufacturer=<?= (int) $manufacturer['id'] ?>" class="brand-tile">
                 <?= e($manufacturer['name']) ?>
@@ -84,6 +86,7 @@ require __DIR__ . '/partials/header.php';
         <a class="button small" href="<?= BASE_URL ?>/products.php">Cela ponuka</a>
     </div>
     <div class="product-grid">
+        <?php // Kiemelt termekek dinamikus kiirasa. ?>
         <?php foreach ($featuredLights as $light): ?>
             <article class="product-card">
                 <img src="<?= e($light['image_url']) ?>" alt="<?= e($light['name']) ?>">

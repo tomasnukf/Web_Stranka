@@ -1,5 +1,6 @@
 USE prolux;
 
+-- Migracia pre specialne efekty.
 CREATE TABLE IF NOT EXISTS special_effects (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(140) NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS special_effects (
 
 DELETE FROM special_effects;
 
+-- Zakladna ponuka specialnych efektov pre stranku Efekty.
 INSERT INTO special_effects
 (name, category, price, unit, image_url, description, safety_note, active) VALUES
 ('Plamene', 'Pyro FX', 2200.00, 'show', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80', 'Kontrolovane flame efekty pre velke stage show a festivalove podia.', 'Vyhradne s obsluhou, povolenim a presnym bezpecnostnym planom.', 1),
